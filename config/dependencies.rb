@@ -39,3 +39,4 @@ dependency "ck-merb-auth-slice-activation",
 #dependency "yukiko-merb_dynamic_sass",
 #  :require_as => "merb_dynamic_sass"
 dependency "merb_babel"
+dependency "dm-pagination"

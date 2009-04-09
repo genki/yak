@@ -4,7 +4,7 @@
   <% @users.each do |user| %>
     <li>
       <%= gravatar(user.email, 16, :class => :avatar) %>
-      <%= link_to h(user.name), resource(user) %>
+      <%= link_to h(user.login), resource(user) %>
       <% if user.activated? %>
         <%= t(user.activated_at) %>
       <% end %>

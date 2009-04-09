@@ -1,4 +1,5 @@
 = link_to h('Yak'), url(:root)
+= link_to h('Users'), resource(:users)
 - if session.user
   Welcome back,
   = link_to h(session.user.login), resource(session.user)
