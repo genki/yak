@@ -1,0 +1,83 @@
+MerbDynamicSass
+===============
+
+A slice for the Merb framework.
+
+How to use:
+  Put your sass temlates under the Merb.root / app / views / stylesheets directory,
+  then you could get the stylesheet compiled by Sass::Engine,
+  your temlate could also include ERB syntax, and you could use helper methods as well.
+
+  The correspondence between template and route is below:
+
+    GET "/stylesheets/some.css"  --> using Merb.root /app/views/stylesheets/some.css.erb
+    GET "/stylesheets/somedir/some.css" --> using Merb.root /app/views/stylesheets/somedir/some.css.erb
+ 
+How to get static file under the Merb.root/public/stylesheets directory:
+
+  Generated file is usually cached under the Merb.root/tmp/cache/stylesheets.
+  If you want the cache file to be cached under the Merb.root/public/stylesheet direcotry,
+  you should set the following configuration.
+
+    Merb::Slices.config[:merb_dynamic_sass][:page_cache] => true
+
+  (Note that this slice is not registed in production environment.)
+
+
+-----------------------------------------------------------------------------
+
+Instructions for installation:
+
+file: config/router.rb
+
+Usually you have to add routes of the slice, but this slice automatically add routes
+because it seems that the route used for this porpose is fixed.
+
+
+Also you probably don't have to run the following rake task:
+
+rake slices:merb_dynamic_sass:install
+
+
+file: config/init.rb
+
+# add the slice as a regular dependency
+
+dependency 'merb_dynamic_sass'
+
+# if needed, configure which slices to load and in which order
+
+Merb::Plugins.config[:merb_slices] = { :queue => ["MerbDynamicSass", ...] }
+
+# optionally configure the plugins in a before_app_loads callback
+
+Merb::BootLoader.before_app_loads do
+  
+  Merb::Slices::config[:merb_dynamic_sass][:option] = value
+  
+end
+
+------------------------------------------------------------------------------
+
+You can put your application-level overrides in:
+
+host-app/slices/merb_dynamic_sass/app - controllers, models, views ...
+
+Templates are located in this order:
+
+1. host-app/slices/merb_dynamic_sass/app/views/*
+2. gems/merb_dynamic_sass/app/views/*
+3. host-app/app/views/*
+
+You can use the host application's layout by configuring the
+merb_dynamic_sass slice in a before_app_loads block:
+
+Merb::Slices.config[:merb_dynamic_sass] = { :layout => :application }
+
+By default :merb_dynamic_sass is used. If you need to override
+stylesheets or javascripts, just specify your own files in your layout
+instead/in addition to the ones supplied (if any) in 
+host-app/public/slices/merb_dynamic_sass.
+
+In any case don't edit those files directly as they may be clobbered any time
+rake merb_dynamic_sass:install is run.
