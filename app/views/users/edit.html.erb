@@ -1,0 +1,26 @@
+<% if session.user == @user %>
+  <%= partial "command" %>
+<% end %>
+
+<h1>
+  <%= t("User", "Edit %s") % h(@user.login) %>
+</h1>
+<%= error_messages_for @user %>
+
+<%= form_for @user, :action => resource(@user) do %>
+  <dl class="form">
+    <dt>
+      <%= label t("Email Address"), :for => :email %>:
+      <%= t("If you change it, you have to reactivate your account.") %>
+    </dt>
+    <dd>
+      <%= text_field :email, :class => :half %>
+    </dd>
+    <dt>
+      <%= t("Are you sure?") %>
+    </dt>
+    <dd>
+      <%= submit t("Update"), :class => :submit %>
+    </dd>
+  </dl>
+<% end =%>

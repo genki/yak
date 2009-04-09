@@ -8,3 +8,10 @@ Merb::Config.use { |c|
   # or redirect logger using IO handle
   # c[:log_stream] = STDOUT
 }
+
+Merb::BootLoader.before_app_loads do
+  Merb::Slices::config[:merb_auth_slice_activation].merge!({
+    :from_email => 'no-reply@yak.s21g.com',
+    :activation_host => "yak.s21g.com"
+  })
+end

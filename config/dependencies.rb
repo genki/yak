@@ -32,3 +32,10 @@ dependency "dm-validations", dm_gems_version
 dependency "dm-serializer", dm_gems_version   
 
 dependency "merb_datamapper", merb_gems_version
+
+# Added after merb-gen app
+dependency "ck-merb-auth-slice-activation",
+  :require_as => "merb-auth-slice-activation"
+dependency "yukiko-merb_dynamic_sass",
+  :require_as => "merb_dynamic_sass"
+dependency "merb_babel"

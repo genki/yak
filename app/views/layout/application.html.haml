@@ -6,4 +6,6 @@
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
     %link{ :href => "/stylesheets/master.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }/
   %body
-    = catch_content :for_layout
+    #header= partial 'layout/header'
+    #body= catch_content :for_layout
+    #footer= partial 'layout/footer'

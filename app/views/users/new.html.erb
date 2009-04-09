@@ -1,0 +1,42 @@
+<h1><%= t("Sign up") %></h1>
+
+<%= error_messages_for @user %>
+
+<%= form_for @user, :action => resource(:users) do %>
+<dl class="form">
+  <dt>
+    <%= label t('Login ID'), :for => :login %>
+  </dt>
+  <dd>
+    <%= text_field :login, :class => :half %>
+  </dd>
+  <dt>
+    <%= label t('Email Address'), :for => :email %>
+  </dt>
+  <dd>
+    <%= text_field :email, :class => :half %>
+  </dd>
+  <dt>
+    <%= label t('Password'), :for => :password %>
+  </dt>
+  <dd>
+    <%= password_field :password, :class => :half %>
+  </dd>
+  <dt>
+    <%= label t('Password Confirmation'), :for => :password_confirmation %>
+  </dt>
+  <dd>
+    <%= password_field :password_confirmation, :class => :half %>
+  </dd>
+  <dt>
+    <%= t("Ready to create?") %>
+  </dt>
+  <dd>
+    <%= submit t('Create Account'), :class => :submit %>
+  </dd>
+</dl>
+<% end =%>
+<!--
+<p>Edit this file in <tt>app/views/users/new.html.erb</tt></p>
+<p>For more information and examples of CRUD views read <a href="http://wiki.merbivore.com/howto/crud_view_example_with_merb_using_erb"> this wiki page</a>
+-->

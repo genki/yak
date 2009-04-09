@@ -1,0 +1,15 @@
+<h1><%= t("User List") %></h1>
+
+<ul class="simple">
+  <% @users.each do |user| %>
+    <li>
+      <%= gravatar(user.email, 16, :class => :avatar) %>
+      <%= link_to h(user.name), resource(user) %>
+      <% if user.activated? %>
+        <%= t(user.activated_at) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @users %>

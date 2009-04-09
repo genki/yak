@@ -1,0 +1,3 @@
+- if session.user == @user
+  = partial :command
+%h1= "About %s" % h(@user.login)
