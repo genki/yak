@@ -16,6 +16,8 @@ class User
   property :login, String, :size => 255, :unique_index => true
   property :email, String, :size => 255, :unique_index => true
 
+  has n, :yaks
+
   validates_present :login, :email
   validates_length :login, :min => 4
   validates_length :password, :min => 4, :allow_nil => true
