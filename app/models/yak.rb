@@ -7,4 +7,7 @@ class Yak
   property :created_at, DateTime
 
   belongs_to :user
+
+  belongs_to :yak
+  has n, :yaks
 end
