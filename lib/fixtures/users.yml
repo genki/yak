@@ -1,0 +1,6 @@
+users:
+  -
+    :login: yakyak
+    :email: yak@yak.com
+    :activated_at: 2009/4/10
+    :crypted_password: "4137c56b07fae2c0463f537e1faaf1192b076980"
