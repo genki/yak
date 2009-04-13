@@ -1,0 +1,13 @@
+- if @user && @user.person == @person
+  #command= partial :command
+%h1== Edit #{h(@person.name)}
+
+= form_for(@person, :action => resource(@person), :method => :put) do
+  %dl.form
+    %dt
+      %label= label "Name", :for => :name
+    %dd= text_field :name, :class => :half
+    %dt
+      %label= label "Email", :for => :email
+    %dd= h(@person.email)
+  = submit "Update", :disabled_with => "Updating..."

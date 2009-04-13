@@ -1,0 +1,6 @@
+%h1 People who use this service
+%ul.simple
+  - @people.each do |person|
+    %li
+      = gravatar(person.email, 16, :class => :avatar)
+      = link_to h(person.name), resource(person)

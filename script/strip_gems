@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+Dir['gems/gems/*'].each do |dir|
+  %w(
+    Generaters TODO README.* README
+    spec/**/* test/**/* examples/**/* tasks/**/*
+    CHANGES CHANGES.txt CHANGELOG
+    LICENSE MIT-LICENSE Rakefile CONTRIBUTORS
+    Manifest.txt History.txt install.rb setup.rb
+  ).each do |pattern|
+    Dir[File.join(dir, pattern)].each do |path|
+      command = "rm -rf #{path}"
+      puts command
+      system command
+    end
+  end
+end

@@ -1,9 +1,8 @@
 = link_to h('Yak'), url(:root)
-= link_to h('Users'), resource(:users)
-- if session.user
+= link_to h('People'), resource(:people)
+- if @user
   Welcome back,
-  = link_to h(session.user.login), resource(session.user)
-  = link_to h('Logout'), url(:logout)
+  = link_to h(@user.person.name), resource(@user.person)
+  = link_to h('Logout'), BeeU.logout(url(:root))
 - else
-  = link_to h('Login'), url(:login)
-  = link_to h('Signup'), resource(:users, :new)
+  = link_to h('Login'), BeeU.login(request.full_uri)

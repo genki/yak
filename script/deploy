@@ -1,0 +1,3 @@
+#!/bin/sh
+
+appcfg.sh -e genki.gthp.net@gmail.com update tmp/war

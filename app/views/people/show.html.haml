@@ -1,0 +1,10 @@
+- if @user && @user.person == @person
+  #command= partial :command
+%h1= h(@person.name)
+
+.half.left
+  .profile= gravatar(@person.email, 80)
+.half.right
+  %h2 Sites
+  %ul
+.clear
