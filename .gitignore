@@ -20,3 +20,7 @@ gems/cache/*
 gems/doc/*
 gems/specifications/*
 merb_profile_results
+*.war
+Capfile
+config/deploy.rb
+config/database.yml
