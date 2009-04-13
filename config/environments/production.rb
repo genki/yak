@@ -1,6 +1,6 @@
 Merb.logger.info("Loaded PRODUCTION Environment...")
 Merb::Config.use { |c|
-  c[:exception_details] = false
+  c[:exception_details] = true
   c[:reload_classes] = false
   c[:log_level] = :error
   
