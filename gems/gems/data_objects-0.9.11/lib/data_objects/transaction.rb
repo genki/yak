@@ -5,7 +5,8 @@ module DataObjects
 
   class Transaction
 
-    HOST = "#{Socket::gethostbyname(Socket::gethostname)[0]}" rescue "localhost"
+    #HOST = "#{Socket::gethostbyname(Socket::gethostname)[0]}" rescue "localhost"
+    HOST = 'localhost'
     @@counter = 0
 
     attr_reader :connection

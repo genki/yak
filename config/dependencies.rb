@@ -31,7 +31,7 @@ else
   dependency "do_mysql"
 end
 dependency "merb_datamapper", merb_gems_version
-#dependency "data_objects"
+dependency "data_objects"
 #dependency "do_sqlite3", do_gems_version # If using another database, replace this
 #dependency "dm-migrations", dm_gems_version   
 #dependency "dm-timestamps", dm_gems_version   
@@ -39,4 +39,4 @@ dependency "merb_datamapper", merb_gems_version
 #dependency "dm-serializer", dm_gems_version   
 
 dependency "dm-validations", dm_gems_version  
-#dependency "dm-aggregates", dm_gems_version   
+dependency "dm-aggregates", dm_gems_version   
