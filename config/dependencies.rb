@@ -28,7 +28,7 @@ dependency "dm-core", dm_gems_version
 if Merb.env == 'production'
   dependency "dm-datastore-adapter"
 else
-  dependency "do_mysql"
+  dependency "do_mysql", "0.9.12"
 end
 dependency "merb_datamapper", merb_gems_version
 dependency "data_objects"
@@ -38,5 +38,6 @@ dependency "data_objects"
 #dependency "dm-types", dm_gems_version        
 #dependency "dm-serializer", dm_gems_version   
 
-dependency "dm-validations", dm_gems_version  
+#dependency "dm-validations", dm_gems_version  
 dependency "dm-aggregates", dm_gems_version   
+dependency "dm-should"

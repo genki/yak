@@ -1,0 +1,1 @@
+/usr/local/jruby/bin/jruby extconf.rb install -i gems /Users/takiuchi/project/do/do_mysql/pkg/do_mysql-0.9.12.gem

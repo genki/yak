@@ -28,7 +28,7 @@ begin
       user.nil? ? user : user.id
     end
   end
-  
+=begin  
 rescue
   Merb.logger.error <<-TEXT
   
@@ -40,5 +40,6 @@ rescue
     See merb/merb-auth/setup.rb and strategies.rb to customize your setup
 
     TEXT
+=end
 end
 

@@ -1,0 +1,125 @@
+= dm-should
+== Current Tree
+  lib
+  |-- dm-should
+  |   |-- model.rb
+  |   |-- property.rb
+  |   |-- resource.rb
+  |   |-- spec_class
+  |   |   |-- be_integer.rb
+  |   |   |-- be_present.rb
+  |   |   |-- be_unique.rb
+  |   |   `-- match.rb
+  |   |-- spec_class.rb
+  |   |-- spec_collector.rb
+  |   |-- specs
+  |   |   |-- errors.rb
+  |   |   |-- errors_on_property.rb
+  |   |   |-- model_specs.rb
+  |   |   `-- property_specs.rb
+  |   |-- specs.rb
+  |   |-- translation.rb
+  |   `-- version.rb
+  `-- dm-should.rb
+  
+  3 directories, 17 files
+
+== Current SpecDoc
+
+=== 01: DataMapper::Model (Class methods) with dm-should
+==== property_with_spec method
+- should be defined in order to define specs of models
+- should be used like below:
+    class Item1
+      include DataMapper::Resource
+      
+      property :id, Serial
+      property_with_spec :name, String do
+        should be_present
+      end
+    end
+    
+
+==== Available predicates
+- All available predicates are defined on <tt>DataMapper::Should::AvailablePredicates</tt> module
+- Available predicates means the methods could be used in +property_with_spec+ block
+
+
+=== 02: DataMapper::Resource (Instance methods) with dm-should
+==== valid? method
+- should return +true+ if a record satisfy its specs and +false+ if it doesn't
+- a record shouldn't be saved when valid? returns +false+
+
+==== errors method
+- should return an instance of <tt>DataMapper::Should::Errors</tt>.
+- Once valid? method executed and return +false+, record.errors has details about it
+- You can generate error messages by passing a block to +translation_keys_each+ method:
+    record.errors.translation_keys_each do |translation_key, assigns|
+      your_translation_system.translate(translation_key, assigns)
+    end
+
+  The arguments of the block is +translation_key+ and +assigns+:
+  [<b>translation_key</b>]
+    a translation_key is kind of 'warn.be_present' or 'warn.be_unique'.
+    They are combinations of 'doctype.spectype'.
+  [<b>assigns[:field]</b>]
+    is now a +String+ like 'Modelname.fieldname'. this is also supposed to be translated 
+  [<b>assigns[:actual]</b>]
+    is an actual value at the recently validated field 
+  
+- Or, You can simply use <tt>record.error.error_messages</tt> to get translated error message with default translation system
+    record.errors.error_messages
+    # => ["Item.name was expected to be present, but it wasn't"] 
+  You can customize the default message set. See <tt>DataMapper::Should::Translation.translations</tt>.  
+  
+
+=== 03: Specs Class and SpecClass of dm-should
+==== What is Specs?
+For example, when you have an Item class like this:
+  class Item
+    include DataMapper::Resource
+    property :id, Serial
+    property_with_spec :name, String do
+      should be_present
+      should be_unique
+      should match(/^A/)
+    end
+  end
+  
+- <tt>Item.specs</tt> is an instance of <tt>DataMapper::Should::ModelSpecs</tt>,
+
+  its class is a child class of <tt>DataMapper::Should::Specs</tt>.
+    
+- <tt>Item.specs.on(:name)</tt> is an instance of <tt>DataMapper::Should::PropertySpecs</tt>,
+
+  its class is a child class of <tt>DataMapper::Should::Specs</tt>.
+    
+- <tt>record.errors</tt> is an instance of <tt>DataMapper::Should::Errors</tt>,
+
+  its class is a child class of <tt>DataMapper::Should::ModelSpecs</tt>.
+    
+- <tt>record.errors.on(:name)</tt> is an instance of <tt>DataMapper::Should::ErrorsOnProperty</tt>,
+
+  its class is a child class of <tt>DataMapper::Should::PropertySpecs.</tt>
+    
+- These <tt>DataMapper::Should::Specs</tt>'s subclasses stores objects of SpecClass
+- You can access one of SpecClass of a Specs instance by <tt>[]</tt> method
+
+==== What is SpecClass?
+
+[There are 5 subclasses now.]
+  <tt>DataMapper::Should::BePresent</tt>,
+  <tt>DataMapper::Should::BeInteger</tt>,
+  <tt>DataMapper::Should::BePositiveInteger</tt>,
+  <tt>DataMapper::Should::BeUnique</tt>,
+  <tt>DataMapper::Should::Match</tt>
+
+- They have <tt>satisfy?</tt> method to ensure themselves
+
+  <tt>satisfy?</tt> method is sended when <tt>record.valid?</tt> .   
+  
+
+Finished in 0.021336 seconds
+
+17 examples, 0 failures
+
